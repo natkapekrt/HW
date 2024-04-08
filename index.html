@@ -9,13 +9,61 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 style="background-color:BlueViolet;">Převod binárního čísla na desítkové</h1>
-        <textarea id="input" placeholder="Zadejte číslo"></textarea>
-        <button style="background-color:DarkOrchid;"onclick="prevest()">Přenést na desítkové</button>
-        <textarea id="output" placeholder="Zde výstup" readonly></textarea>
-    </div>
-    <script src="script.js"></script>
+    <h2 style="background-color:DarkOliveGreen;">Převod Binárního Čísla na Desítkové</h2>
+ 
+    <label for="binaryInput">Zadejte binární číslo:</label>
+    <input type="text" id="binaryInput">
+    <button onclick="convertBinaryToDecimal()" style="background-color:OliveDrab;">Převést</button>
+     
+    <p id="result"></p>
+     
+    <script>
+    function convertBinaryToDecimal() {
+        var binaryInput = document.getElementById("binaryInput").value;
+        var decimalResult = 0;
+     
+        for (var i = binaryInput.length - 1, j = 0; i >= 0; i--, j++) {
+            if (binaryInput[i] === '1') {
+                decimalResult += Math.pow(2, j);
+            }
+        }
+     
+        document.getElementById("result").innerHTML = "Desítkové číslo: " + decimalResult;
+    }
+    </script>
 
+<h2 style ="background-color: rgb(51, 99, 20);">Převod Desítkového Čísla na Binární</h2>
+ 
+  <label for="decimalInput">Zadejte desítkové číslo:</label>
+  <input type="text" id="decimalInput">
+<button style ="background-color: rgb(67, 107, 37);" onclick="convertDecimalToBinary()">Převést</button>
+ 
+  <p id="result"></p>
+ 
+    
+   <script>
+    function convertDecimalToBinary() {
+        var decimalInput = parseInt(document.getElementById("decimalInput").value);
+        var binaryResult = '';
+     
+        if (isNaN(decimalInput)) {
+            document.getElementById("result").innerHTML = "Zadejte platné desítkové číslo.";
+            return;
+        }
+     
+        if (decimalInput === 0) {
+            binaryResult = '0';
+        } else {
+            while (decimalInput > 0) {
+                binaryResult = (decimalInput % 2).toString() + binaryResult;
+                decimalInput = Math.floor(decimalInput / 2);
+            }
+        }
+     
+        document.getElementById("result").innerHTML = "Binární číslo: " + binaryResult;
+    }
+    </script>
+     
+     
 </body>
 </html>
